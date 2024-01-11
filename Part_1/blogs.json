@@ -17,5 +17,19 @@
     "description": "Description Test: 2!",
     "main_image": "images/main_image_2_test.jpg",
     "date_time": 1671017981
+  },
+  {
+    "reference": "00003",
+    "title": "a blog post NEW",
+    "description": "this is a blog post meant for testing",
+    "main_image": "images/0yQ1Co7.jpg",
+    "date_time": 1734942896000
+  },
+  {
+    "reference": "00004",
+    "title": "Testing",
+    "description": "this is a blog post meant for testing",
+    "main_image": "images/0yQ1Co7.jpg",
+    "date_time": 1734942896000
   }
 ]
