@@ -7,6 +7,8 @@ import UpdateUser from '../../application/use_cases/user/UpdateUser';
 import DeleteUser from '../../application/use_cases/user/DeleteUser';
 import { ServiceLocator } from '../../infrastructure/config/service-locator';
 import User from '../../domain/entities/User';
+import BlogMongo from '../../infrastructure/orm/mongoose/schemas/Blog';
+import UserBlogMongo from '../../infrastructure/orm/mongoose/schemas/UserBlog';
 
 export default {
 
@@ -152,6 +154,12 @@ export default {
     // Treatment
     let user = null;
     try {
+      // Delete all blogs and relationships when deleting a user
+      const userBlogs = await UserBlogMongo.find({ user_id: toDeleteUserId });
+      const blogIds = userBlogs.map((userBlog) => userBlog.blog_id);
+      await UserBlogMongo.deleteMany({ user_id: toDeleteUserId });
+      await BlogMongo.deleteMany({ _id: { $in: blogIds }});
+
       user = await DeleteUser(toDeleteUserId, serviceLocator);
     } catch (err: unknown) {
       if (err instanceof Error) {
